@@ -1,0 +1,71 @@
+.record-button {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  color: white;
+}
+
+.record-button.idle,
+.record-button.interruptible {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  box-shadow: 0 8px 24px rgba(74, 144, 226, 0.3);
+}
+
+.record-button.idle:hover,
+.record-button.interruptible:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 32px rgba(74, 144, 226, 0.4);
+}
+
+.record-button.preparing,
+.record-button.processing {
+  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+  box-shadow: 0 8px 24px rgba(149, 165, 166, 0.3);
+  cursor: not-allowed;
+}
+
+.record-button.processing {
+  cursor: not-allowed;
+}
+
+.record-button.recording {
+  background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+  box-shadow: 0 8px 24px rgba(39, 174, 96, 0.4);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.button-icon {
+  width: 90px;
+  height: 90px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .record-button {
+    width: 160px;
+    height: 160px;
+  }
+
+  .button-icon {
+    width: 72px;
+    height: 72px;
+  }
+}

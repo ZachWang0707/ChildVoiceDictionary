@@ -1,0 +1,170 @@
+.home-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #e8f4fc 0%, #ffffff 100%);
+  padding: 20px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+.vocabulary-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px 16px;
+  background-color: white;
+  border: 2px solid #4a90e2;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.vocabulary-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #357abd;
+  border-color: #357abd;
+}
+
+.vocabulary-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: calc(100vh - 80px);
+  padding-top: 40px;
+  gap: 30px;
+}
+
+.title {
+  font-size: 32px;
+  color: #2c3e50;
+  margin: 0;
+  font-weight: 600;
+}
+
+.status-text {
+  font-size: 18px;
+  color: #7f8c8d;
+  font-weight: 500;
+  margin-top: -10px;
+}
+
+.debug-info {
+  margin-top: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 80%;
+  width: 500px;
+  text-align: left;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.history-preview {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.history-preview ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+}
+
+.history-preview li {
+  margin: 4px 0;
+  color: #555;
+}
+
+.debug-toggle {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: transparent;
+  background-color: rgba(200, 210, 220, 0.1);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.debug-toggle:hover {
+  background-color: rgba(180, 190, 200, 0.15);
+}
+
+.debug-toggle.active {
+  background-color: rgba(39, 174, 96, 0.25);
+}
+
+.debug-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.debug-toggle:hover .debug-icon,
+.debug-toggle.active .debug-icon {
+  opacity: 0.3;
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    padding: 10px;
+  }
+
+  .header {
+    padding-right: 10px;
+  }
+
+  .vocabulary-link {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .vocabulary-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .status-text {
+    font-size: 16px;
+  }
+
+  .debug-info {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .debug-toggle {
+    left: 12px;
+    bottom: 12px;
+  }
+}
