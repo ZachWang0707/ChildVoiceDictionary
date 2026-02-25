@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  child-voice-dictionary:
+    build: .
+    container_name: child-voice-dictionary
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+      - "3001:3001"
+    volumes:
+      - ./.env.local:/app/.env.local:ro
+    environment:
+      - NODE_ENV=production
