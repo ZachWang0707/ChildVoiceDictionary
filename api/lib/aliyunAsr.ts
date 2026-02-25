@@ -1,7 +1,4 @@
-/**
- * 阿里云智能语音交互 - 一句话识别（RESTful API）
- * 文档：https://help.aliyun.com/zh/isi/developer-reference/restful-api-2
- */
+import { AliyunTokenManager } from './aliyunToken';
 
 interface AliyunASRResponse {
   task_id: string;
@@ -12,13 +9,18 @@ interface AliyunASRResponse {
 
 export class AliyunASR {
   private appKey: string;
-  private token: string;
+  private tokenManager: AliyunTokenManager;
   private endpoint: string;
 
-  constructor(appKey: string, token: string, endpoint: string = 'https://nls-gateway-cn-shanghai.aliyuncs.com/stream/v1/asr') {
+  constructor(
+    appKey: string,
+    accessKeyId: string,
+    accessKeySecret: string,
+    endpoint: string = 'https://nls-gateway-cn-shanghai.aliyuncs.com/stream/v1/asr'
+  ) {
     this.appKey = appKey;
-    this.token = token;
     this.endpoint = endpoint;
+    this.tokenManager = new AliyunTokenManager(accessKeyId, accessKeySecret);
   }
 
   /**
@@ -33,11 +35,12 @@ export class AliyunASR {
     sampleRate: number = 16000
   ): Promise<string> {
     const url = this.buildUrl(format, sampleRate);
+    const token = await this.tokenManager.getToken();
 
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'X-NLS-Token': this.token,
+        'X-NLS-Token': token,
         'Content-Type': 'application/octet-stream',
         'Content-Length': audioBuffer.length.toString(),
       },
@@ -45,7 +48,8 @@ export class AliyunASR {
     });
 
     if (!response.ok) {
-      throw new Error(`Aliyun ASR request failed: ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(`Aliyun ASR request failed: ${response.status} - ${errorText}`);
     }
 
     const result: AliyunASRResponse = await response.json();

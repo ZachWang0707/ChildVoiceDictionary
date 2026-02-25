@@ -20,13 +20,14 @@ export default async function handler(req: any, res: any) {
 
   try {
     const appKey = process.env.ALIYUN_ASR_APPKEY || '';
-    const token = process.env.ALIYUN_ASR_TOKEN || '';
+    const accessKeyId = process.env.ALIYUN_ACCESS_KEY_ID || '';
+    const accessKeySecret = process.env.ALIYUN_ACCESS_KEY_SECRET || '';
 
-    if (!appKey || !token) {
+    if (!appKey || !accessKeyId || !accessKeySecret) {
       return res.status(500).json({ error: 'Aliyun ASR credentials not configured' });
     }
 
-    const asr = new AliyunASR(appKey, token);
+    const asr = new AliyunASR(appKey, accessKeyId, accessKeySecret);
     const audioBuffer = await getRequestBody(req);
     const text = await asr.recognize(audioBuffer, 'wav', 16000);
     console.log(`[ASR] ${text}`);
